@@ -32,26 +32,26 @@ names(dtXtrain) <- tolower(names(dtXtrain))
 dtActivities <- read.table("activity_labels.txt")
 dtActivities[, 2] = gsub("_", "", tolower(as.character(dtActivities[, 2])))
 dtYtrain[,1] = dtActivities[dtYtrain[,1], 2]
-names(dtActivities) <- "activity"
+names(dtYtrain) <- "activity"
 # 4. Appropriately labels the data set with descriptive variable names. 
 names(dtSubject) <- "subject"
 cleanData <- cbind(dtSubject, dtYtrain, dtXtrain)
 write.table(cleanData, "merged_clean_data.txt")
 # 5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
-uSubjects = unique(dtSubject)[,1]
-lengthSubjects = length(uSubjects)
-lengthActivities = length(dtActivities[,1])
-cols = dim(cleanData)[2]
-ret = cleanData[1:(lengthSubjects * lengthActivities), ]
+uSubjects <- unique(dtSubject)[,1]
+lengthSubjects <- length(uSubjects)
+lengthActivities <- length(dtActivities[,1])
+cols <- dim(cleanData)[2]
+ret <- cleanData[1:(lengthSubjects * lengthActivities), ]
 
-row = 1
+row <- 1
 for (sub in 1:lengthSubjects) {
  for (ac in 1:lengthActivities) {
-    ret[row, 1] = uSubjects[sub]
-    ret[row, 2] = dtActivities[ac, 2]
-    x <- cleaned[cleaned$sbuject== sub & cleaned$activity == dtActivities[ac, 2],]
+    ret[row, 1] <- uSubjects[sub]
+    ret[row, 2] <- dtActivities[ac, 2]
+    x <- cleanData[cleanData$sbuject== sub & cleanData$activity == dtActivities[ac, 2],]
     ret[row, 3:cols] <- colMeans(x[, 3:cols])
-    row = row + 1
+    row <- row + 1
   }
 }
 write.table(ret, "data_set_with_the_average.txt")
