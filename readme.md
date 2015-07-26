@@ -1,0 +1,1 @@
+download the data source from https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip. then unzip it. put it into your local folder. for example, "c:\rstudio\cleanexample". Then set work directory to this folder "c:\rstudio\cleanexample\UCI HAR Dataset\".
